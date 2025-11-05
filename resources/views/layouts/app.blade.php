@@ -16,9 +16,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta name="keywords" content="Admin Web Phimn" />
     <script type="application/x-javascript">
-      addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+    addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 
-                      function hideURLbar() { window.scrollTo(0, 1); }
+    function hideURLbar() { window.scrollTo(0, 1); }
     </script>
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('backend/css/bootstrap.css') }}" rel="stylesheet" type="text/css" />
@@ -133,7 +133,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             </button>
                             <h1>
                                 <a class="navbar-brand" href="{{ url('/home') }}"><span
-                                        class="fa fa-area-chart"></span> Glance<span class="dashboard_text">Design
+                                        class="fa fa-area-chart"></span> P33<span class="dashboard_text">Design
                                         dashboard</span></a>
                             </h1>
                         </div>
@@ -279,6 +279,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                         </li>
                                     </ul>
                                 </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-child"></i>
+                                        <span>Quản lý tài khoản</span>
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </a>
+                                </li>
                                 <li class="treeview {{ $segment == 'adsnetwork' ? 'active' : '' }}">
                                     <a href="#">
                                         <i class="fa fa-film"></i>
@@ -315,7 +322,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                         <li>
                                             <a href="{{ route('visitor.create') }}"><i class="fa fa-angle-right"></i>
                                                 Đang online <span style=" color: green;">●</span>
-                                                {{ \Tracker::onlineUsers()->count() }}</a>
+
                                         </li>
 
                                     </ul>
@@ -719,12 +726,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                             {{-- <i class="pull-left fa fa-users dollar2 icon-rounded"></i> --}}
                             <div class="stats">
                                 <span style=" color: green;">Đang Online :
-                                    {{ \Tracker::onlineUsers()->count() }}<br />
+
                                     <span>Tổng Users truy cập : {{ $total_users }}<br />
                                         <span>Tổng Users truy cập tuần : {{ $total_users_week }}</span><br />
                                         <span>1 Tháng: {{ $total_users_month }}</span><br />
-                                        <span>3 tháng: {{ $total_users_3months }}</span><br />
-                                        <span>1 năm : {{ $total_users_thisyear }}</span>
+
 
                             </div>
                         </div>
@@ -760,15 +766,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <!--footer-->
         <div class="footer">
             <p>
-                &copy; 2022 Glance Design Dashboard. All Rights Reserved | Design by
-                <a href="#" target="_blank">HieuDen</a>
+                &copy; 2025 P33 Design Dashboard. All Rights Reserved | Design by
+                <a href="#" target="_blank">Phòng 33</a>
             </p>
         </div>
         <!--//footer-->
         </div>
     @else
         @yield('content_login')
-        
+    @endif
 </body>
 
 </html>

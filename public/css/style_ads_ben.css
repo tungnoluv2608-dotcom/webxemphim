@@ -1,0 +1,116 @@
+#lightbox-player-mb{
+    position:fixed;
+    width:300px;
+    height:250px;
+    top:15%;
+    left:13%;
+    z-index:99990;
+    background-color:#fff;
+    text-align:center
+}
+#lightbox-player-pc{
+    position:fixed;
+    width:640px;
+    height:360px;
+    top:15%;
+    right:33%;
+    z-index:99990;
+    background-color:#fff;
+    text-align:center
+}
+.preload-button{
+    text-align:center;
+    position:relative;
+    background-color:#222;
+    padding:2px;
+    font-size:14px;
+    margin-top:-20px;
+    color:#ffbc00
+}
+
+
+.mobilex{
+    display:none
+}
+div#go88{
+    padding-top:10px;
+    margin-bottom:-5px
+}
+div#go88pc{
+    padding-top:4px;
+    margin-bottom:-4px
+}
+
+.balloon-content{
+    width:120px;
+    height:600px;
+    background:#fff
+}
+.close-balloon-left{
+    background:rgba(33,51,66,.5);
+    width:auto;
+    text-align:center;
+    color:#f9f871;
+    padding:0 5px
+}
+.close-balloon-right{
+    background:rgba(33,51,66,.5);
+    width:fit-content;
+    color:#f9f871;
+    padding:0 5px;
+    border:1px solid #213342
+}
+.balloon-block{
+    display:none
+}
+.ajax-player-loading{
+    position:relative;
+    display:block;
+    z-index:99
+}
+
+.close-to-play-block{
+    display:none;
+    position:absolute;
+    top:70px;
+    z-index:9999;
+    left:30%;
+    margin:auto;
+    width:100%;
+    max-width:360px
+}
+.close-to-play-link{
+    width:100%;
+    text-align:center;
+    display:block;
+    background:rgba(0,0,0,.8);
+    color:#fff;
+    text-transform:uppercase;
+    font-weight:600;
+    padding:10px
+}
+@media(min-width:1024px) {
+    .cash-fish {
+        display: none
+    }
+
+    .top-mobile-banner {
+        display: none
+    }
+
+    .top-pc-banner {
+        display: block
+    }
+
+    .under-player-mobile-banner {
+        display: none
+    }
+
+    .under-player-pc-banner {
+        display: block
+    }
+
+    .balloon-block {
+        display: block
+    }
+}
