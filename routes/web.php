@@ -4,18 +4,18 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
-//use App\Http\Controllers\GenreController;
-// use App\Http\Controllers\CountryController;
-// use App\Http\Controllers\MovieController;
-// use App\Http\Controllers\EpisodeController;
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\MovieController;
+use App\Http\Controllers\EpisodeController;
 use App\Http\Controllers\InfoController;
-// use App\Http\Controllers\VisitorController;
-// use App\Http\Controllers\LinkMovieController;
-// use App\Http\Controllers\AdsController;
-// use App\Http\Controllers\AdsNetworkController;
+use App\Http\Controllers\LinkMovieController;
+use App\Http\Controllers\AdsController;
+use App\Http\Controllers\AdsNetworkController;
 use App\Http\Controllers\LoginGoogleController;
 use App\Http\Controllers\LoginFBController;
-// use App\Http\Controllers\LeechMovieController;
+use App\Http\Controllers\LeechMovieController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -74,6 +74,10 @@ Route::resource('genre', GenreController::class);
 Route::resource('country', CountryController::class);
 Route::resource('movie', MovieController::class);
 Route::resource('linkmovie', LinkMovieController::class);
+Route::get('/user', [UserController::class, 'index'])->name('user.index');
+Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
+
+
 //them tap phim
 Route::get('add-episode/{id}', [EpisodeController::class,'add_episode'])->name('add-episode');
 Route::resource('episode', EpisodeController::class);

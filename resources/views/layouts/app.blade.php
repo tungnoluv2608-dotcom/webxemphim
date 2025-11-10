@@ -3,6 +3,7 @@ Author: W3layouts
 Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
+-----------------Giao diện admin----------------
 -->
 <!DOCTYPE html>
 <html>
@@ -308,44 +309,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="treeview active">
-                                    <a href="#">
-                                        <i class="fa fa-users"></i>
-                                        <span>Users truy cập</span>
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </a>
-                                    <ul class="treeview-menu">
-                                        <li>
-                                            <a href="{{ route('visitor.index') }}"><i class="fa fa-angle-right"></i>
-                                                Thống kê tất cả</a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('visitor.create') }}"><i class="fa fa-angle-right"></i>
-                                                Đang online <span style=" color: green;">●</span>
-
-                                        </li>
-
-                                    </ul>
-                                </li>
-                                {{-- <li class="treeview">
-                  <a href="#">
-                    <i class="fa fa-video-camera"></i>
-                    <span>Tập phim</span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                  </a>
-                  <ul class="treeview-menu">
-                    <li>
-                      <a href="{{route('episode.create')}}"
-                        ><i class="fa fa-angle-right"></i> Thêm tập phim</a
-                      >
-                    </li>
-                    <li>
-                      <a href="{{route('episode.index')}}"
-                        ><i class="fa fa-angle-right"></i> Liệt kê tập phim</a
-                      >
-                    </li>
-                  </ul>
-                </li> --}}
                             </ul>
                             <div class="clearfix"></div>
                         </div>
