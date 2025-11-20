@@ -16,6 +16,7 @@ use App\Http\Controllers\LoginGoogleController;
 use App\Http\Controllers\LoginFBController;
 use App\Http\Controllers\LeechMovieController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 
@@ -48,6 +49,22 @@ Route::post('register', [RegisterController::class, 'register']);
 Route::get('login',[LoginController::class, 'showLoginForm']);
 // post credential to the login method
 Route::post('login', [LoginController::class, 'login'])->name('login');
+
+// Thêm route logout (sau route login)
+Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
+
+// Routes cho người dùng - DÙNG UserController
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [App\Http\Controllers\UserController::class, 'profile'])->name('user.profile');
+    Route::post('/profile/update', [App\Http\Controllers\UserController::class, 'updateProfile'])->name('user.profile.update');
+});    
+// Routes cho gói dịch vụ
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+    Route::post('/profile/update', [UserController::class, 'updateProfile'])->name('user.profile.update');
+    Route::get('/packages', [PackageController::class, 'index'])->name('packages.index');
+});
 // remove default login route
 Route::get('/', [IndexController::class, 'home'])->name('homepage');
 Route::get('/danh-muc/{slug}', [IndexController::class, 'category'])->name('category');
@@ -74,9 +91,14 @@ Route::resource('genre', GenreController::class);
 Route::resource('country', CountryController::class);
 Route::resource('movie', MovieController::class);
 Route::resource('linkmovie', LinkMovieController::class);
-Route::get('/user', [UserController::class, 'index'])->name('user.index');
-Route::delete('/user/{user}', [UserController::class, 'destroy'])->name('user.destroy');
 
+// Routes cho admin quản lý user
+Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
+    Route::get('/users', [UserController::class, 'index'])->name('user.index');
+    Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+    Route::put('/users/{id}/package', [UserController::class, 'updateUserPackage'])->name('user.package.update');
+    Route::delete('/users/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+});
 
 //them tap phim
 Route::get('add-episode/{id}', [EpisodeController::class,'add_episode'])->name('add-episode');

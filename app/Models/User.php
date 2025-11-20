@@ -22,7 +22,8 @@ class User extends Authenticatable
         'email',
         'password',
         'google_id',
-        'facebook_id'
+        'facebook_id',
+        'avatar',
     ];
 
     /**
@@ -43,4 +44,30 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function packages()
+    {
+        return $this->belongsToMany(Package::class, 'user_packages')
+                    ->withPivot('start_date', 'end_date', 'payment_status', 'transaction_id', 'amount')
+                    ->withTimestamps();
+    }
+
+    public function userPackages()
+    {
+        return $this->hasMany(UserPackage::class);
+    }
+
+    // Lấy gói dịch vụ hiện tại đang hoạt động
+    public function currentPackage()
+    {
+        return $this->hasOne(UserPackage::class)
+                    ->where('payment_status', 'paid')
+                    ->where('end_date', '>', now())
+                    ->latest();
+    }
+
+    // Kiểm tra user có đang sử dụng gói nào không
+    public function hasActivePackage()
+    {
+        return $this->currentPackage()->exists();
+    }
 }

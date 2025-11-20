@@ -79,43 +79,282 @@ img:hover {
 #headwrap .form-group {
     margin: 0;
 }
+/* ===== CSS HEADER CẢI TIẾN ===== */
+
 #header {
     background: #1b2d3c;
+    padding: 8px 0;
+    border-bottom: 1px solid #2d4254;
+    min-height: 80px;
 }
-#header .site-title {
+
+#headwrap {
+    align-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 15px;
+    justify-content: space-between;
+    height: 64px;
+}
+
+/* Logo nhỏ gọn */
+.slogan {
+    flex: 0 0 auto;
     margin: 0;
-    text-indent: -9999px;
-    background: url(https://phimhay.co/wp-content/uploads/2019/02/logo-footer.png)
-        no-repeat top left;
-    background-size: contain;
-    height: 45px;
-    margin-top: -5px;
+    padding: 0;
+}
+
+.slogan a.logo {
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.slogan a.logo:hover {
+    transform: translateY(-1px);
+}
+
+.slogan a.logo img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(1.1);
+}
+
+/* Thanh tìm kiếm nhỏ gọn */
+.halim-search-form {
+    flex: 0 1 350px;
+    min-width: 280px;
+    max-width: 350px;
     position: relative;
+    margin: 0 auto;
 }
-#header .site-title a {
-    position: absolute;
+
+.form-timkiem .form-group {
+    margin: 0;
+}
+
+.form-timkiem .input-group {
+    display: flex;
+    gap: 0;
+}
+
+.form-timkiem form {
+    display: flex;
     width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #3a5068;
+    transition: all 0.3s ease;
 }
-@media (max-width: 767px) {
-    #header .site-title {
-        background-position: center !important;
+
+.form-timkiem form:focus-within {
+    box-shadow: 0 4px 12px rgba(68, 226, 255, 0.2);
+    border-color: #44e2ff;
+}
+
+.form-timkiem input {
+    flex: 1;
+    border: none;
+    padding: 8px 15px;
+    background: transparent;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    min-width: 0;
+}
+
+.form-timkiem input::placeholder {
+    color: #666;
+    font-size: 13px;
+}
+
+.form-timkiem button {
+    background: #44e2ff;
+    color: #1a2b3a;
+    border: none;
+    padding: 8px 15px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.form-timkiem button:hover {
+    background: #3bd1e9;
+}
+
+/* Phần bên phải để chèn banner */
+.col-md-4.hidden-xs {
+    flex: 0 0 300px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+/* Banner quảng cáo header */
+.header-banner {
+    height: 60px;
+    width: 100%;
+    background: #2d4254;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #89b8d6;
+    font-size: 12px;
+    border: 1px dashed #44e2ff;
+}
+
+/* Navigation cũng ngắn hơn */
+.navbar-container {
+    background: #1a2b3a;
+    border-bottom: 1px solid #2d4254;
+}
+
+.halim-navbar .navbar-nav > li > a {
+    padding: 12px 15px;
+    font-size: 13px;
+}
+
+/* Kết quả tìm kiếm */
+ul#result {
+    position: absolute;
+    z-index: 9999;
+    background: #1b2d3c;
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 0 0;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid #44e2ff;
+    border-top: none;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#result li {
+    padding: 8px 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #e0e0e0;
+    font-size: 13px;
+}
+
+#result li:hover {
+    background: rgba(68, 226, 255, 0.1);
+}
+
+#result li img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 3px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .halim-search-form {
+        flex: 0 1 300px;
+        min-width: 250px;
+    }
+    
+    .col-md-4.hidden-xs {
+        flex: 0 0 250px;
     }
 }
-#header > .container {
-    padding-left: 0;
-    padding-right: 0;
-    position: relative;
+
+@media (max-width: 992px) {
+    #headwrap {
+        flex-wrap: wrap;
+        height: auto;
+        gap: 10px;
+    }
+    
+    .halim-search-form {
+        flex: 1;
+        max-width: 100%;
+        order: 3;
+    }
+    
+    .col-md-4.hidden-xs {
+        display: none;
+    }
 }
-.header-nav {
-    margin-right: 0;
-    position: relative;
+
+@media (max-width: 576px) {
+    .form-timkiem form {
+        border-radius: 15px;
+    }
+    
+    .form-timkiem input {
+        padding: 10px 15px;
+    }
+    
+    .form-timkiem button {
+        padding: 10px 15px;
+    }
+    
+    .slogan a.logo img {
+        height: 40px;
+    }
 }
-.header-nav img {
-    max-width: 100%;
-    margin: 10px 0;
+/* ===== CSS MENU TÀI KHOẢN ===== */
+
+.navbar-nav .dropdown-menu {
+    background: #1a2b3a;
+    border: 1px solid #44e2ff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    min-width: 200px;
+}
+
+.navbar-nav .dropdown-menu li a {
+    color: #e0e0e0;
+    padding: 8px 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-nav .dropdown-menu li a:hover {
+    background: rgba(68, 226, 255, 0.1);
+    color: #44e2ff;
+}
+
+.navbar-nav .dropdown-menu li:last-child a {
+    border-bottom: none;
+}
+
+.navbar-nav .dropdown-menu .divider {
+    height: 1px;
+    margin: 5px 0;
+    overflow: hidden;
+    background-color: #44e2ff;
+}
+
+.navbar-nav .dropdown-menu li a i {
+    width: 16px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.navbar-nav > li.dropdown:hover > .dropdown-menu {
+    display: block;
+}
+
+.navbar-nav > li > a i.fa-user {
+    margin-right: 5px;
+    font-size: 14px;
 }
 .container {
 }
