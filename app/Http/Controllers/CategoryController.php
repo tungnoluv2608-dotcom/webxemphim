@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+
 class CategoryController extends Controller
 {
     /**
@@ -104,7 +105,6 @@ class CategoryController extends Controller
                 'title' => 'required|unique:categories|max:255',
                 'slug' => 'required|unique:categories|max:255',
                 'description' => 'required|max:255',
-                // 'hinhanh' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=2000,max_height=2000',
                 'status' => 'required',
             ],
             [

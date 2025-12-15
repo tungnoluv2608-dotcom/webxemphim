@@ -426,7 +426,7 @@ ul.dropdown-menu{
 	-moz-animation: none;
 	background-image: none;
 }
-/*--- User Panel---*/
+/*--- Tài khoản trang chủ---*/
 .profile_details_left {
     float: left;
     padding-left: 5px;
@@ -461,6 +461,7 @@ ul.dropdown-menu li {
     padding: 0;
 	background: #fff;
 }
+
 .user-panel-top ul{
 	padding-left:0;
 }
@@ -473,7 +474,7 @@ ul.dropdown-menu li {
     font-size:11px;
     font-weight:bold;
 	color:#FFF;
-	background:#e64c65;
+	background:#8c4ce6;
 	line-height:20px;
 	width:20px;
 	height:20px;
@@ -792,7 +793,7 @@ i.icon_6{
   }
 }
 /*--Progress bars--*/
-/********* profile details **********/
+/********* profile **********/
 ul.dropdown-menu.drp-mnu i.fa {
     margin-right: 0.5em;
     color: #629aa9;

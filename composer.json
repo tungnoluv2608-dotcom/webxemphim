@@ -10,15 +10,17 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
+        "laravel/socialite": "^5.24",
         "laravel/tinker": "^2.5",
         "laravel/ui": "3.4",
-        "laravelcollective/html": "^6.4"
+        "laravelcollective/html": "^6.4",
+        "realrashid/sweet-alert": "^7.3",
+        "yoeunes/toastr": "^2.3"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
         "fakerphp/faker": "^1.9.1",
         "laravel/sail": "^1.0.1",
-        "laravel/telescope": "^5.15",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^5.10",
         "phpunit/phpunit": "^9.5.10"

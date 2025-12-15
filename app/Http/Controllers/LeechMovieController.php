@@ -11,6 +11,7 @@ use App\Models\Movie;
 use App\Models\Movie_Genre;
 use App\Models\Episode;
 use Carbon\Carbon;
+
 class LeechMovieController extends Controller
 {
     public function store_all_movie_by_page_api($page){

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Ads;
 use App\Models\AdsPosition;
 
+
 class AdsController extends Controller
 {
     /**

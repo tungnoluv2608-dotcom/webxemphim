@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AdsNetWork;
 use App\Models\AdsNetWorkScript;
+
 class AdsNetWorkController extends Controller
 {
     /**

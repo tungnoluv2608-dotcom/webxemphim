@@ -7,6 +7,7 @@ use App\Models\User;
 use Exception;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 class LoginGoogleController extends Controller
 {
     /**

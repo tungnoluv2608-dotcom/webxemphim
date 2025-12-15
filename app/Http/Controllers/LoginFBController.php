@@ -10,112 +10,43 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginFBController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
     public function redirectToFacebook()
     {
         return Socialite::driver('facebook')->redirect();
     }
+
     public function handleFacebookCallback()
     {
         try {
-        
             $user = Socialite::driver('facebook')->user();
-         
-            $finduser = User::where('email', $user->email)->first();
-        
-            if($finduser){
-         
+
+            // Facebook đôi khi không trả về email
+            $email = $user->email ?? ($user->id . '@facebook.com');
+
+            $finduser = User::where('email', $email)->first();
+
+            if ($finduser) {
+
+                // cập nhật facebook_id nếu chưa có
+                if (!$finduser->facebook_id) {
+                    $finduser->update(['facebook_id' => $user->id]);
+                }
+
                 Auth::login($finduser);
-        
                 return redirect()->intended('/');
-         
-            }else{
+            } else {
+
                 $newUser = User::create([
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'facebook_id'=> $user->id,
-                    'password' => encrypt('123456789')
+                    'name'        => $user->name,
+                    'email'       => $email,
+                    'facebook_id' => $user->id,
+                    'password'    => bcrypt('123456789'),
                 ]);
-        
+
                 Auth::login($newUser);
-        
                 return redirect()->intended('/');
             }
-        
+
         } catch (Exception $e) {
             dd($e->getMessage());
         }

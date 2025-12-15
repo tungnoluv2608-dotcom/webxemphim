@@ -123,7 +123,7 @@ class MovieController extends Controller
         }
         File::put($path.'movies.json',json_encode($list));
         
-
+        
         return view('admincp.movie.index', compact('list','category','country','list_genre'));
     }
     public function capnhat_theloai(Request $request){
@@ -528,5 +528,6 @@ class MovieController extends Controller
     	echo json_encode($output);
 
     }
+    
    
 }

@@ -95,18 +95,19 @@
             </script>
         </div>
         <main id="main-contents" class="col-xs-12 col-sm-12 col-md-8">
-            @foreach ($ads_bottom_duoihot as $key => $ads_bottom)
-                <a href="{{ $ads_bottom->ads_link }}" target="_blank">
-                    <img width="100%" src="{{ asset('uploads/ads/' . $ads_bottom->ads_gif) }}">
-                </a>
-            @endforeach
+            @if(!Auth::user() || Auth::user()->is_vip == 0)
+                @foreach ($ads_bottom_duoihot as $key => $ads_bottom)
+                    <a href="{{ $ads_bottom->ads_link }}" target="_blank">
+                        <img width="100%" src="{{ asset('uploads/ads/' . $ads_bottom->ads_gif) }}">
+                    </a>
+                @endforeach
+            @endif
             @foreach ($category_home as $key => $cate_home)
                 <section id="halim-advanced-widget-2">
 
                     <div class="section-heading">
 
                         <span class="h-text">{{ $cate_home->title }}</span>
-
 
                         <style type="text/css">
                             .xemthem {

@@ -17,7 +17,7 @@ use App\Models\AdsPosition;
 use App\Models\Comments;
 use Carbon\Carbon;
 use DB;
-
+use Illuminate\Support\Facades\Auth;
 class IndexController extends Controller
 {
     public function insert_comment(Request $request){
@@ -29,9 +29,105 @@ class IndexController extends Controller
         $comment->visitor_id = $data['visitor_id'];
         $comment->comment = $data['comment'];
         $comment->date_created = Carbon::now('Asia/Ho_Chi_Minh');
+        $comment->status = 1;
         $comment->save();
-
+        
+        return redirect()->back()->with('success', 'Bình luận đã được gửi và đang chờ duyệt.');
     }
+    public function edit_comment(Request $request, $id)
+{
+    try {
+        $comment = Comments::findOrFail($id);
+        
+        // Kiểm tra quyền
+        if(!$this->checkCommentPermission($comment)){
+            return response()->json([
+                'success' => false, 
+                'message' => 'Bạn không có quyền chỉnh sửa bình luận này'
+            ]);
+        }
+        
+        $comment->comment = $request->comment;
+        $comment->save();
+        
+        return response()->json([
+            'success' => true, 
+            'message' => 'Bình luận đã được cập nhật'
+        ]);
+        
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false, 
+            'message' => 'Có lỗi xảy ra: ' . $e->getMessage()
+        ], 500);
+    }
+}
+
+public function delete_comment($id)
+{
+    try {
+        $comment = Comments::findOrFail($id);
+        
+        // Kiểm tra quyền
+        if(!$this->checkCommentPermission($comment)){
+            return response()->json([
+                'success' => false, 
+                'message' => 'Bạn không có quyền xóa bình luận này'
+            ]);
+        }
+        
+        $comment->delete();
+        
+        return response()->json([
+            'success' => true, 
+            'message' => 'Bình luận đã được xóa'
+        ]);
+        
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false, 
+            'message' => 'Có lỗi xảy ra: ' . $e->getMessage()
+        ], 500);
+    }
+}
+    
+    // Hàm kiểm tra quyền (private)
+    private function checkCommentPermission($comment)
+{
+    try {
+        // 1. Admin có quyền với tất cả
+        if(Auth::check() && Auth::user()->role == 'admin'){
+            return true;
+        }
+        
+        // 2. Kiểm tra theo email
+        $currentEmail = '';
+        
+        if(Auth::check()){
+            $currentEmail = Auth::user()->email;
+        } else {
+            // Lấy từ session hoặc request
+            $currentEmail = session('commenter_email');
+            
+            // Nếu AJAX gửi email qua
+            if(!$currentEmail && request()->has('email')) {
+                $currentEmail = request()->email;
+            }
+        }
+        
+        // So sánh email
+        if($currentEmail && $comment->email == $currentEmail){
+            return true;
+        }
+        
+        return false;
+        
+    } catch (\Exception $e) {
+        // Ghi log lỗi
+        \Log::error('checkCommentPermission error: ' . $e->getMessage());
+        return false;
+    }
+}
     public function locphim(){
         
          //get
@@ -236,8 +332,11 @@ class IndexController extends Controller
         $count_views= $count_views + 1; 
         $movie->count_views = $count_views;
         $movie->save();
+        $comments = Comments::where('movie_id', $movie->id)
+        ->orderBy('id', 'DESC')
+        ->get();
        
-    	return view('pages.movie', compact('movie','related','episode','episode_tapdau','episode_current_list_count','rating','count_total','meta_title','meta_description','meta_image'));
+    	return view('pages.movie', compact('movie','related','episode','episode_tapdau','episode_current_list_count','rating','count_total','meta_title','meta_description','meta_image','comments'));
     }
     public function add_rating(Request $request){
         $data = $request->all();

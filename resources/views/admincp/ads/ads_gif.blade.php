@@ -42,7 +42,7 @@
                     <tr>
                       <td>{{$position2->ads_position_name}} </td>
                       <td><a href="{{route('ads-gif',[$position2->id])}}" class="btn btn-primary btn-sm">Thêm quảng cáo theo vị trí</a></td>
-                      <td><form method="POST" action="{{url('turn-onoff-ads'.'/'.$position2->id)}}">
+                      <td><form method="POST" action="{{url('admin/turn-onoff-ads'.'/'.$position2->id)}}">
                         @csrf
                           @if($position2->ads_position_status==1)
                           

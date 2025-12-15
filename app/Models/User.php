@@ -24,6 +24,9 @@ class User extends Authenticatable
         'google_id',
         'facebook_id',
         'avatar',
+        'is_vip',
+        'vip_expired_at',
+        'is_admin'
     ];
 
     /**
@@ -43,6 +46,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_admin' => 'boolean'
     ];
     public function packages()
     {
@@ -70,4 +74,40 @@ class User extends Authenticatable
     {
         return $this->currentPackage()->exists();
     }
+    public function getAvatarUrlAttribute()
+    {
+        if (!$this->avatar) {
+            return null;
+        }
+        
+        // Nếu avatar đã là URL đầy đủ (Google, Facebook avatar)
+        if (filter_var($this->avatar, FILTER_VALIDATE_URL)) {
+            return $this->avatar;
+        }
+        
+        // Nếu avatar là đường dẫn trong storage
+        if (strpos($this->avatar, 'avatars/') === 0 || strpos($this->avatar, 'public/avatars/') === 0) {
+            return asset('storage/' . $this->avatar);
+        }
+        
+        // Mặc định trả về đường dẫn từ public folder
+        return asset($this->avatar);
+    }
+
+    /**
+     * Get the first letter of user's name for default avatar
+     */
+    public function getInitialAttribute()
+    {
+        return strtoupper(substr($this->name, 0, 1));
+    }
+    public function isAdmin()
+    {
+        return $this->is_admin === true;
+    }
+    // User.php
+public function isVipActive()
+{
+    return $this->is_vip && $this->vip_expired_at && \Carbon\Carbon::parse($this->vip_expired_at) > now();
+}
 }
